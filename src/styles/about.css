@@ -1,0 +1,18 @@
+.about {
+    width:80%;
+    margin: 0 auto;
+    
+}
+
+.about h1 {
+    text-align: center;
+}
+
+.about h3{
+    color: #6495ED;
+}
+
+.about p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+

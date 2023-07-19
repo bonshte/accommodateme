@@ -41,20 +41,14 @@
     border-radius: 50%;
 }
 
-.dashboard-section {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap:15px;
-    
-}
+
 
 .main-nav {
     flex:8;
     display:flex;
     flex-direction: row;
     justify-content: space-around;
-    gap: 10px;
+    gap: 12px;
     
 }
 
@@ -64,14 +58,13 @@
     
 }
 
-
-
-
 .nav-link {
     text-decoration: none;
     color:white;
     transition: transform 0.2s ease;
-    padding: 20px 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
 }
 
 .nav-link:hover {
@@ -80,8 +73,12 @@
     
 }
 
-.root-layout{
+body {
     background-color: #FAF0E6;
+}
+
+.hide {
+    display:none;
 }
 
 

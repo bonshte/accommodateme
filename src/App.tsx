@@ -9,6 +9,8 @@ import TenantDashBoard from './pages/TenantDashBoard';
 import LandlordDashboard from './pages/LandlordDashboard';
 import Profile from './pages/Profile';
 import Missing from './pages/Missing';
+import { UserContextProvider } from './context/UserContext';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,9 +29,9 @@ const router = createBrowserRouter(
 )
 function App() {
   return (
-    
+    <UserContextProvider>
       <RouterProvider router={router} />
-    
+    </UserContextProvider>
   );
 }
 

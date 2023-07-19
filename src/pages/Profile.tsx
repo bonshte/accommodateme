@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Profile = () => {
+  const username = localStorage.getItem("username");
   return (
-    <div>Profile</div>
+    <div>{username}</div>
   )
 }
 

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext';
-import axios from '../../api/axios';
-import '../../styles/login.css'
+import { UserContext } from '../context/UserContext';
+import axios from '../api/axios';
+import "../styles/login.css"
 const LOGIN_URL = "api/auth/login";
 const Login = () => {
   const navigate = useNavigate();

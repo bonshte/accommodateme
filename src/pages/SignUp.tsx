@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import axios from "../../api/axios";
+import axios from "../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import '../../styles/Signup.css';
-import { UserContext } from "../../context/UserContext";
+import '../styles/Signup.css';
+import { UserContext } from "../context/UserContext";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{6,20}$/;
 const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,15}$/;

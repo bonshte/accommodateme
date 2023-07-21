@@ -1,0 +1,31 @@
+.landlord-dashboard-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.properties-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-content: space-between;
+    grid-auto-rows: 100%;
+}
+
+
+
+.ad-property {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    text-decoration: none;
+    color: black;
+}
+.ad-property:hover {
+    background-color: #6495ED;
+    color: white;
+}

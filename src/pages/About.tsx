@@ -3,31 +3,27 @@ import '../styles/about.css';
 const About = () => {
   return (
     <div className="about">
+        <div>
         <h1 className="about-us-heading">About us</h1>
         <br/>
-        <p>Welcome to Accommodate Me, your premier destination for stress-free apartment searches and seamless communication between landlords and tenants. We understand that finding the perfect rental property can be overwhelming, but we’re here to make it an effortless and transparent experience. Allow us to introduce you to Accommodate Me and the range of features we offer.</p>
-        <br/>
+        <p>
+        Welcome to our AccommodateMe, your trusted online home for exploring, discovering, and securing the best properties available on the market, for either rent or sale. Our mission is to streamline the property search process and to assist you in navigating the real estate market with precision, accuracy, and complete ease.
+        </p>
+        </div>
+        <div>
         <h3>About Accommodate Me:</h3>
-        <p>At Accommodate Me, we’re dedicated to simplifying the rental process and fostering transparent and trustworthy relationships between landlords and tenants. Our mission is to provide a platform that ensures both parties have a positive experience while searching for and managing rental properties.</p>
-        <br/>
+        <p>
+        Our platform stands out for its advanced AI-driven search engine that refines and personalizes your property search, providing you with accurate, relevant, and in-depth information tailored specifically to your unique needs and preferences. From location to budget, from amenities to nearby facilities, we’ve made it possible for you to specify every criterion you desire, ensuring you find the perfect property that ticks all your boxes.
+        </p>
+        </div>
+        <div>
         <h3>Effortless Apartment Search:</h3>
-        <p>We’ve designed Accommodate Me to make apartment hunting easy and efficient. Our user-friendly interface and advanced search options enable you to quickly find apartments that match your requirements. With just a few clicks, you can filter properties by location, size, amenities, and price range, ensuring you discover the perfect place to call home.
-        </p>
-        <br/>
-        <h3>Transparency and Detailed Listings:</h3>
         <p>
-          Transparency is at the heart of Accommodate Me. We believe in providing comprehensive and accurate information for each property. Our listings showcase high-quality photos, detailed descriptions, floor plans, and key features, empowering you to make informed decisions. We also offer real-time availability updates to save you time and prevent disappointment.
-          </p>
-        <br/>
-        <h3>Seamless Landlord-Tenant Communication:</h3>
-        <p>
-          We prioritize effective communication between landlords and tenants. Accommodate Me offers a secure messaging system that facilitates direct and transparent communication. Whether you have questions, need assistance, or want to schedule a viewing, our platform ensures prompt and reliable communication throughout the renting process.
+        With the knowledge that property search can often be overwhelming, we have transformed that process into an enjoyable journey. Whether you are a first-time homebuyer, a seasoned investor, or simply looking to rent a new place, our platform leverages cutting-edge technology to provide you with a modern, intuitive, and user-friendly interface that simplifies your search and accelerates your success.
         </p>
-        <br/>
-        <h3>Landlord Dashboard for Efficient Property Management:</h3>
-        <p>
-        For landlords, Accommodate Me provides a powerful and user-friendly dashboard. You can easily track and manage your properties, view rental income and expenses, and handle maintenance requests, all in one centralized location. Our platform streamlines property management, giving you more time to focus on what matters most.
-        </p>
+        </div>
+        
+       
     </div>
   )
 }

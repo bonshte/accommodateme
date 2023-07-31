@@ -7,7 +7,7 @@ import "../styles/login.css"
 const LOGIN_URL = "api/auth/login";
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const statusContext = useContext(UserContext);
@@ -21,16 +21,16 @@ const Login = () => {
     try {
       const response = await axios.post (
         LOGIN_URL,
-        JSON.stringify({username, password}) ,
+        JSON.stringify({email, password}) ,
         {
           headers: {"Content-Type" : "application/json"}
         }
       );
       const token = response.data.token;
       localStorage.setItem("token", token);
-      localStorage.setItem("username", username);
+      
       setIsAuth(true);
-      setUsername("");
+      setEmail("");
       setPassword("");
       navigate("/");
     } catch(err) {
@@ -43,15 +43,15 @@ const Login = () => {
     <section className="login-section">
       <h1 id="login-heading">Login</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="username">
-          Username:
+        <label htmlFor="email">
+          Email:
         </label>
         <input type="text"
         className="login-input"
         autoComplete="off"
         onChange={(e) =>
-        setUsername(e.target.value)} 
-        value={username}
+        setEmail(e.target.value)} 
+        value={email}
         required/>
         <label htmlFor="password">
           Password:

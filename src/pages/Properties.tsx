@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
-  const authContext = useContext(UserContext);
+const Properties = () => {
+    const authContext = useContext(UserContext);
   const {
     isAuth
   } = authContext!;
@@ -16,10 +16,10 @@ const Profile = () => {
     }
   }, [isAuth,navigate]);
 
-  const username = localStorage.getItem("username");
+    
   return (
-    <div>{username}</div>
+    <div>Properties</div>
   )
 }
 
-export default Profile
+export default Properties

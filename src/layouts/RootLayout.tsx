@@ -13,9 +13,7 @@ const RootLayout = () => {
     isAuth,
     setIsAuth
   } = context!;
-  const username = localStorage.getItem("username");
-  const profileText = username ? username : "Profile";
-
+  
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -29,15 +27,9 @@ const RootLayout = () => {
           <img src={logo} alt="logo" />
         </div>
         <nav className="main-nav">
-          {isAuth && <NavLink className="nav-link" id="tenant-dashboard-link" to="tenant-dashboard">
-            Tenant Dashboard
-          </NavLink>}
-          {isAuth && <NavLink className="nav-link" id="landlord-dashboard-link" to="landlord-dashboard">
-            Landlord Dashboard
-          </NavLink>}
-          <NavLink className="nav-link" id="home-link" to="/">
+          {isAuth && <NavLink className="nav-link" id="properties-link" to="properties">
             Home
-          </NavLink>
+          </NavLink>}
 
           {!isAuth && <NavLink className="nav-link" id="sign-up-link" to="sign-up">
             Sign Up
@@ -45,11 +37,11 @@ const RootLayout = () => {
           {!isAuth && <NavLink className="nav-link" id="login-link" to="login">
             Login
           </NavLink>}
-          <NavLink className="nav-link" id="about-link" to="about">
+          <NavLink className="nav-link" id="about-link" to="/">
             About
           </NavLink>
           {isAuth && <NavLink className="nav-link" id="profile-link" to="profile">
-            {profileText}
+            Profile
           </NavLink>}
           {isAuth && <NavLink onClick={handleLogout} className="nav-link" id="logout-link" to="/">
             Logout

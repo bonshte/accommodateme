@@ -7,7 +7,6 @@ import { UserContext, UserContextProvider } from '../context/UserContext';
 
 
 const RootLayout = () => {
-  const navigate = useNavigate();
   const context = useContext(UserContext);
   const {
     isAuth,
@@ -27,9 +26,9 @@ const RootLayout = () => {
           <img src={logo} alt="logo" />
         </div>
         <nav className="main-nav">
-          {isAuth && <NavLink className="nav-link" id="properties-link" to="properties">
-            Home
-          </NavLink>}
+           <NavLink className="nav-link" id="properties-chat-link" to="chat-properties">
+            Chat
+          </NavLink>
 
           {!isAuth && <NavLink className="nav-link" id="sign-up-link" to="sign-up">
             Sign Up

@@ -27,8 +27,9 @@ const Login = () => {
         }
       );
       const token = response.data.token;
+      const userId = response.data.userId;
       localStorage.setItem("token", token);
-      
+      localStorage.setItem("userId",userId);
       setIsAuth(true);
       setEmail("");
       setPassword("");

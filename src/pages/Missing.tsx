@@ -2,7 +2,7 @@ import React from 'react'
 
 const Missing = () => {
   return (
-    <div>Hello</div>
+    <div>Missing page</div>
   )
 }
 

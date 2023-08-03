@@ -23,9 +23,9 @@ function App() {
 
   return (
     <UserContextProvider>
-      <ChatContextProvider>
+      
         <RouterProvider router={router} />
-        </ChatContextProvider>
+       
     </UserContextProvider>
   );
 }

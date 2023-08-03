@@ -73,15 +73,6 @@ const ChatList = () => {
               
             </button>
           </div>
-          <div className="chat-list-search">
-            <div className="search-wrap">
-              <input type="text" placeholder="Search Here" required />
-              <button className="search-btn">
-                  <FontAwesomeIcon icon={faSearch} />
-                
-              </button>
-            </div>
-          </div>
           <div className="chat-list-items">
             {Array.isArray(chatSessions) && chatSessions.map((item, index) => (
               <ChatListItem

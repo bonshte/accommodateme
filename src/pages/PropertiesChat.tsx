@@ -5,6 +5,7 @@ import ChatList from '../components/ChatList';
 import ChatContent from '../components/ChatContent';
 import Properties from '../components/Properties';
 import '../styles/propertiesChat.css'
+import { ChatContextProvider } from '../context/ChatContext';
 
 
 const PropertiesChat = () => {
@@ -24,9 +25,11 @@ const PropertiesChat = () => {
     
   return (
     <div className="main-chat-body">
-      <ChatList />
-      <ChatContent />
-      <Properties />
+      <ChatContextProvider>
+        <ChatList />
+        <ChatContent />
+        <Properties />
+      </ChatContextProvider>
     </div>
   )
 }

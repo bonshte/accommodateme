@@ -8,7 +8,6 @@ import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 
-const BASE_CHAT_URL = "api/chat-properties";
 const ChatContent = () => {
 
   const authContext = useContext(UserContext);
@@ -26,14 +25,12 @@ const ChatContent = () => {
   // }, [isAuth,navigate]);
 
   const chatContext = useContext(ChatContext);
-
-
   const {
-    
     currentMessages,
     setCurrentMessages,
     currentChatSession,
-    setCurrentChatSession
+    setCurrentChatSession,
+    setChatSessions,
   } = chatContext!;
 
   const chatEndRef = useRef<null | HTMLDivElement>(null);
@@ -44,54 +41,74 @@ const ChatContent = () => {
     }
   }, [currentMessages]);
 
-  const [msg, setMsg] = useState(""); 
+  const [msg, setMsg] = useState("");
 
-const handleSend = async () => {
-  if (msg.trim() === "") return;
+  const handleSend = async () => {
+    if (msg.trim() === "") {
+      return;
+    }
 
-  const newMessage: ChatMessage = {
-    fromUser: true,
-    message: msg,
-  };
-  setMsg("");
-  setCurrentMessages((prevMessages) => [...prevMessages, newMessage]);
-
-  setIsLoading(true);
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
-
-  try {
-    const response = await axios.post(
-      `api/chat-properties/${userId}/${currentChatSession?.sessionId}`,
-      JSON.stringify(msg),
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-      }
-    );
-
-    const responseMessage: ChatMessage = {
-      fromUser: false,
-      message: response.data.message,
+    console.log("begin handleSend", currentChatSession?.sessionId);
+    const newMessage: ChatMessage = {
+      fromUser: true,
+      message: msg,
+      sessionId: currentChatSession!.sessionId
     };
+    setMsg("");
+    const oldMessageHistory = currentMessages;
+    setCurrentMessages((prevMessages) => [...prevMessages, newMessage]);
 
-    setCurrentMessages((prevMessages) => [...prevMessages, responseMessage]);
-    setIsLoading(false);
-    if (currentChatSession?.sessionId === 0) {
-      const newChatSession: ChatSession = {
-        description: response.data.message,
-        sessionId: response.data.sessionId,
+    setIsLoading(true);
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    try {
+      const response = await axios.post(
+        `api/properties-chat/${userId}/${currentChatSession?.sessionId}`,
+        JSON.stringify(msg),
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+        }
+      );
+      
+      const responseMessage: ChatMessage = {
+        fromUser: false,
+        message: response.data.message,
+        sessionId: response.data.chatSessionId
       };
-      setCurrentChatSession(newChatSession);
-      console.log(newChatSession);
+      
+      if (currentChatSession?.sessionId === 0) {
+        //here is the problem :()
+        console.log(response);
+        const updatedMessage : ChatMessage = {
+          fromUser: true,
+          message: newMessage.message,
+          sessionId: response.data.chatSessionId
+        }
+        const updatedMessageHistory = [...oldMessageHistory, newMessage];
+        setCurrentMessages(updatedMessageHistory);
+        const startedChatSession: ChatSession = {
+          sessionId: response.data.chatSessionId,
+          description: newMessage.message
+        }
+        console.log("started chat session",startedChatSession)
+        setCurrentChatSession(startedChatSession);
+        setChatSessions(prevChatSessions => [startedChatSession, ...prevChatSessions]);
+      
+      }
+      setCurrentMessages((prevMessages) => [...prevMessages, responseMessage]);
+      
+
+      console.log("end handleSend", currentChatSession?.sessionId);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
-    
-  } catch (err) {
-    console.error(err);
-  }
-}
 
   return (
     <div className="main-chat-content">

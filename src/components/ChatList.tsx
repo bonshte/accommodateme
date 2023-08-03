@@ -12,50 +12,58 @@ const ChatList = () => {
     const {
       chatSessions,
       setChatSessions,
-      currentChatSession,
-      setCurrentChatSession
+      setCurrentChatSession,
+      setCurrentMessages,
+      currentChatSession
     } = chatContext!;
-   
 
+    const createNewChatSession = () => {
+      console.log("begin createNewChatSession", currentChatSession?.sessionId);
+      
+      if (currentChatSession?.sessionId === 0) {
+        return;
+      }
+      const newChatSession = {
+        sessionId: 0,
+        description: 'New Chat'
+      };
+      setCurrentChatSession(newChatSession);
+      console.log("end createNewChatSession", currentChatSession?.sessionId);
+      setCurrentMessages([]);
+    };
+   
     useEffect(() => {
+      console.log("begin fetch chat sessions", currentChatSession?.sessionId);
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
       
       const fetchChatSessions = async () => {
-        console.log("fetching sessions");
         try {
-          const response = await axios.get(`api/chat-properties/${userId}`, {
+          const response = await axios.get(`api/properties-chat/${userId}`, {
             headers: { 
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json'
             }
           });
-          const mappedSessions = response.data.chatSessions.map((session: any) => ({
-            description: session.description,
-            sessionId: session.sessionId, 
-          }));
-          
-          const newChatSession = {
-            description: 'New Chat',
-            sessionId: 0,
-          };
-          mappedSessions.unshift(newChatSession);
+          const mappedSessions = response.data.chatSessions;
           
           setChatSessions(mappedSessions);
-          setCurrentChatSession(newChatSession);
-          
         } catch (error) {
           console.error('Failed to fetch chat properties', error);
         }
       };
     
       fetchChatSessions();
+      console.log("end fetch chat sessions", currentChatSession?.sessionId);
     }, []);
 
 
     return (
         <div className="main-chat-list">
-          <button className="btn">
+          <button 
+          className="btn"
+          onClick={createNewChatSession}
+          >
             <span>New conversation</span>
           </button>
           <div className="chat-list-heading">

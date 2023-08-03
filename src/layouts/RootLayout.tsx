@@ -26,7 +26,7 @@ const RootLayout = () => {
           <img src={logo} alt="logo" />
         </div>
         <nav className="main-nav">
-           <NavLink className="nav-link" id="properties-chat-link" to="chat-properties">
+           <NavLink className="nav-link" id="properties-chat-link" to="properties-chat">
             Chat
           </NavLink>
 

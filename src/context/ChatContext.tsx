@@ -3,6 +3,7 @@ import React, { createContext, useState, ReactNode } from 'react';
 export interface ChatMessage {
     fromUser: boolean;
     message: string;
+    sessionId: number;
 }
   
 export interface ChatSession {
@@ -29,7 +30,7 @@ export const ChatContextProvider: React.FC<ChatContextProviderProps> = ({ childr
     const [currentMessages, setCurrentMessages] = useState<ChatMessage[]>([]);
     const defaultChatSession = { sessionId: 0, description: 'New Chat' };
     const [currentChatSession, setCurrentChatSession] = useState<ChatSession | null>(defaultChatSession);
-    const [chatSessions, setChatSessions] = useState<ChatSession[]>([defaultChatSession]);
+    const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
   
     const value: ChatContextProps = {
       currentMessages,

@@ -54,6 +54,7 @@
   border-radius: 10px 10px 0 10px;
   max-width: 50%;
   min-width:215px;
+  max-width: 300px;
 }
 
 .fromChat {

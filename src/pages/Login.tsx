@@ -34,7 +34,7 @@ const Login = () => {
       setIsAuth(true);
       setEmail("");
       setPassword("");
-      navigate("/chat-properties");
+      navigate("/properties-chat");
     } catch(err) {
       console.log(err);
     }

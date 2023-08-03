@@ -9,36 +9,40 @@ type ChatListItemsProps = {
 
 const ChatListItem: React.FC<ChatListItemsProps> = ({topic, id}) => {
     const chatContext = useContext(ChatContext);
-    console.log("id is",id);
     const {
         currentChatSession,
         setCurrentChatSession,
         setCurrentMessages
      } = chatContext!;
 
+
     const fetchChatHistory = async () => {
+        console.log("begin fetch chat history", currentChatSession?.sessionId);
         if (currentChatSession?.sessionId === id) {
             return;
         }
+        console.log("fetching history")
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
     
         try {
-            const response = await axios.get(`api/chat-properties/${userId}/${id}`, {
+            const response = await axios.get(`api/properties-chat/${userId}/${id}`, {
                 headers: { 
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }, 
             });
+            const messageHistory = response.data.messageHistory;
             
-
-            const mappedMessages = response.data.messageHistory.map((msg: any) => ({
-                fromUser: msg.fromUser,
-                message: msg.translatedMessage,  
-              }));
-    
-            setCurrentChatSession(response.data.chatSession);
-            setCurrentMessages(mappedMessages);
+            
+            setCurrentChatSession(
+                {
+                    sessionId: id,
+                    description: topic
+                }
+            );
+            setCurrentMessages(messageHistory);
+            console.log("end fetch chat history", currentChatSession?.sessionId);
         } catch (error) {
             console.error('Failed to fetch chat session', error);
         }

@@ -1,110 +1,136 @@
 .main-chat-content {
-    flex-grow: 1;
-    padding: 20px 40px;
-    max-width: 63%;
-    border-right:  1px solid #ebe7fb;
+  flex-grow: 1;
+  padding: 20px 40px;
+  max-width: 63%;
+  border-right:  1px solid #ebe7fb;
 }
 
 .chat-content-body {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 80%;
-    overflow: auto;
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 10px 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80%;
+  overflow: auto;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px 10px 0 10px;
+  
 }
 
 .chat-item {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-bottom: 15px;
-    transition: all 0.3s ease;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  transform: scale(0);
+  transform-origin: right;
+  animation-name: showInMsg;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  animation-direction: normal; 
+  animation-timing-function: cubic-bezier(
+    0.88,
+    0.19,
+    0.37,
+    1.11
+  ); 
+  animation-fill-mode: both;
+  animation-delay: 0.2s; 
+}
+@keyframes showInMsg {
+  0% {
     transform: scale(0);
-    transform-origin: right;
-    animation-name: showInMsg;
-    animation-duration: 0.2s;
-    animation-iteration-count: 1;
-    animation-direction: normal; 
-    animation-timing-function: cubic-bezier(
-      0.88,
-      0.19,
-      0.37,
-      1.11
-    ); 
-    animation-fill-mode: both;
-    animation-delay: 0.2s; 
   }
-  @keyframes showInMsg {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
   }
+}
 
-  .chat-item-content {
-    background-color: #6495ED;
-    color:#fff;
-    padding: 15px;
-    border-radius: 10px 10px 0 10px;
-    max-width: 50%;
-    min-width:215px;
-  }
+.chat-item-content {
+  background-color: #6495ED;
+  color:#fff;
+  padding: 15px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 50%;
+  min-width:215px;
+}
 
-  .fromChat {
-    flex-direction: row-reverse;
-    transform-origin: left;
-    color:#d1d1d1;
-  }
+.fromChat {
+  flex-direction: row-reverse;
+  transform-origin: left;
+  color:#d1d1d1;
+}
 
-  .chat-item.fromUser {
-    justify-self: flex-end;
-  }
+.chat-item.fromUser {
+  justify-self: flex-end;
+}
 
-  .chat-item.fromChat {
-    justify-self: flex-start;
-  }
+.chat-item.fromChat {
+  justify-self: flex-start;
+}
 
 .chat-content-footer {
-    padding-top:30px;
+  padding-top:30px;
 }
 
 .send-new-message button {
-    width:36px;
-    height:36px;
-    background-color: #4665ff;
-    border:none;
-    box-shadow: none;
-    outline: none;
-    cursor: pointer;
-    color: white;
-    padding:0;
-    border-radius: 5px;
-    line-height: 36px;
-    transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+  width:36px;
+  height:36px;
+  background-color: #4665ff;
+  border:none;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  padding:0;
+  border-radius: 5px;
+  line-height: 36px;
+  transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
 }
 
 .send-new-message button:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .send-new-message {
-    background-color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .send-new-message input {
-    flex-grow: 1;
-    padding: 0 15px;
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-    outline:none;
+  flex-grow: 1;
+  padding: 0 15px;
+  font-size: 25px;
+  background-color: transparent;
+  border: none;
+  outline:none;
+}
+
+.fromChat .chat-item-content {
+  background-color: #808080;
+  color: #fff;
+  border-radius: 10px 0 10px 10px;
+}
+
+.typing-message {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

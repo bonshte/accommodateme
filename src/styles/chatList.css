@@ -4,28 +4,34 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    color: #fff;
 }
 
 .chat-list-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #87CEFA;
 }
 
 .btn-nobg {
     background-color: transparent;
-    
     border: none;
     box-shadow: none;
     font-size: 18px;
     cursor: pointer;
     padding: 10px;
-    color: black;
+    color: #fff;
     outline: none;
+    transition: color 0.3s;
+}
+
+.btn-nobg:hover {
+    color: #ADD8E6;
 }
 
 .search-wrap {
-    background-color: #E6E5EA;
+    background-color: #f4f4f4;
     border-radius: 5px;
 }
 
@@ -33,41 +39,39 @@
     margin-top: 30px;
     overflow-y: scroll;
     gap: 5px;
+    flex-grow: 1;
     margin-bottom: 50px;
-    border: 1px solid black;
+    border: 1px solid #87CEFA;
     border-radius: 10px;
 }
+
 .chat-list-item {
     height: 7%;
     overflow: hidden;
     line-height: 30px;
-    color: black;
+    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #87CEFA;
     background-color: #6495ED;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px; 
     padding: 10px 10px 10px 20px;
     transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
-    transform: scale(1); /* Use scale(1) instead of scale(0) */
-    animation-name: showIn;
-    animation-duration: 0.2s; 
-    animation-iteration-count: 1;
-    animation-direction: normal; 
-    animation-timing-function: cubic-bezier(0.88, 0.19, 0.37, 1.11); 
-    animation-fill-mode: both; 
-    animation-delay: 0.1s;
+    transform: scale(1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-  
 .chat-list-item:hover {
-    transform: scale(1.1) translateY(-10px) ;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    color:#87CEFA;
 }
-  
+
 @keyframes showIn {
     0% {
-      transform: scale(0); /* Use scale(0) if you want it to start from no size and then animate to 1 */
+      transform: scale(0);
     }
     100% {
       transform: scale(1);
@@ -78,9 +82,11 @@
     background-color: transparent;
     border: none;
     padding: 15px 15px;
+    font-size: 18px;
     outline: none;
     width: 80%;
     padding-right: 0;
+    color: black;
 }
 
 .search-btn {
@@ -91,9 +97,8 @@
     width: 20%;
     cursor: pointer;
     font-size: 20px;
+    color: #87CEFA;
 }
-
-
 
 .btn {
     height:40px;
@@ -104,6 +109,14 @@
     justify-content: space-around;
     align-items: center;
     row-gap: 10px;
+    background: #87CEFA;
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .chat-list-heading {
@@ -113,8 +126,3 @@
 .chat-list-search {
     height: 45px;
 }
-
-
-
-
-  

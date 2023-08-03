@@ -39,9 +39,6 @@ const RootLayout = () => {
           <NavLink className="nav-link" id="about-link" to="/">
             About
           </NavLink>
-          {isAuth && <NavLink className="nav-link" id="profile-link" to="profile">
-            Profile
-          </NavLink>}
           {isAuth && <NavLink onClick={handleLogout} className="nav-link" id="logout-link" to="/">
             Logout
           </NavLink>}

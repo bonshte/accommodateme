@@ -5,120 +5,54 @@ import axios from '../api/axios';
 import '../images/logo.jpg'
 import { useState, useEffect } from 'react';
 import ChatListItem from './ChatListItem';
-import ChatContent from './ChatContent';
 import { ChatContext } from '../context/ChatContext';
 const ChatList = () => {
 
     const chatContext = useContext(ChatContext);
-    const chatSessions = [
-        {   
-            id: 1,
-            topic: "nice apartment in Vitosha nice apartment in Vitosha nice apartment in Vitosha nice apartment in Vitosha nice apartment in Vitosha"
-        },
-        {
-            id: 2,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 3,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 4,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 5,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 6,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 7,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 8,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 9,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-            id: 10,
-            topic: "nice apartment in Vitosha"
-        },
-        {
-          id: 11,
-          topic: "nice apartment in Vitosha"
-      },
-      {
-        id: 12,
-        topic: "nice apartment in Vitosha"
-    },{   
-      id: 13,
-      topic: "nice apartment in Vitosha nice apartment in Vitosha nice apartment in Vitosha nice apartment in Vitosha nice apartment in Vitosha"
-  },
-  {
-      id: 14,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 15,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 16,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 17,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 18,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 19,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 20,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 21,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-      id: 23,
-      topic: "nice apartment in Vitosha"
-  },
-  {
-    id: 24,
-    topic: "nice apartment in Vitosha"
-},
-{
-  id: 25,
-  topic: "nice apartment in Vitosha"
-}
-      ];
+    const {
+      chatSessions,
+      setChatSessions,
+      currentChatSession,
+      setCurrentChatSession
+    } = chatContext!;
+   
 
-    // useEffect(() => {
-    //   const fetchChats = async () => {
-    //     try {
-    //       const response = await axios.get('YOUR_API_ENDPOINT');
-    //       setAllChats(response.data);
-    //     } catch (error) {
-    //       console.error('Failed to fetch chats', error);
-    //     }
-    //   };
-    //   fetchChats();
-    // }, []);
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+      
+      const fetchChatSessions = async () => {
+        console.log("fetching sessions");
+        try {
+          const response = await axios.get(`api/chat-properties/${userId}`, {
+            headers: { 
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          const mappedSessions = response.data.chatSessions.map((session: any) => ({
+            description: session.description,
+            sessionId: session.sessionId, 
+          }));
+          
+          const newChatSession = {
+            description: 'New Chat',
+            sessionId: 0,
+          };
+          mappedSessions.unshift(newChatSession);
+          
+          setChatSessions(mappedSessions);
+          setCurrentChatSession(newChatSession);
+          
+        } catch (error) {
+          console.error('Failed to fetch chat properties', error);
+        }
+      };
+    
+      fetchChatSessions();
+    }, []);
+
+
     return (
         <div className="main-chat-list">
           <button className="btn">
@@ -141,11 +75,11 @@ const ChatList = () => {
             </div>
           </div>
           <div className="chat-list-items">
-            {chatSessions.map((item, index) => (
+            {Array.isArray(chatSessions) && chatSessions.map((item, index) => (
               <ChatListItem
-                topic={item.topic}
-                key={item.id}
-                id={item.id}
+                topic={item.description}
+                key={index}
+                id={item.sessionId}
               />
             ))} 
           </div>

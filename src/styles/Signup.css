@@ -1,76 +1,102 @@
 .register-section {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
-    gap:30px;
+    background: #6495ED;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    animation: fadein 2s;
+    position: relative;
 }
 
 .register-form {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    gap:20px;
-    width: 80%;
-    max-width:400px;
+    align-items: center;
+    width: 300px;
+    gap: 20px;
 }
 
 .register-form label {
-    font-size: 25px;
-}
-
-.offscreen {
-    display:none;
-    flex: 1;
-}
-
-#register-heading {
-    font-size: 40px;
-}
-#register-login-redirect {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    font-size: 24px;  
+    font-weight: 500;
 }
 
 .register-input {
-    height: 40px;
-    border: 0;
-    border-radius: 5px;
-    font-size:22px;
+    width: 100%;
+    padding: 15px;   
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+    font-size: 20px; 
+}
+
+#register-heading {
+    font-size: 60px; 
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #register-button {
-    height: 45px;
-    box-shadow: none;
-    border: 0;
-    color: white;
-    font-size: 22px;
-    transition: transform 0.2s ease-in-out;
-    font-weight:600px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #87CEFA;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
 #register-button:hover {
-    color:#6495ED;
+    background: #ADD8E6;
 }
 
-#register-button:active {
-    transform: translateY(-5px);
+#register-button:disabled {
+    background: #87CEFA;
+    opacity: 0.5;
+}
+
+#register-login-redirect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#register-login-redirect a {
+    color: #ADD8E6;
+    text-decoration: none;
+}
+
+#register-login-redirect a:hover {
+    color: #fff;
+}
+
+.instructions {
+    color: #ff0000;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 .offscreen {
     position: absolute;
-    left: -9999px;
+    left: -10000px;
 }
 
-.instructions {
-    font-size: 0.75rem;
-    border-radius: 0.5rem;
-    background: #6495ED;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
-    font-size: 12px;
+.errmsg {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

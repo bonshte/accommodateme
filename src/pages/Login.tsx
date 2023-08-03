@@ -5,6 +5,7 @@ import { UserContext } from '../context/UserContext';
 import axios from '../api/axios';
 import "../styles/login.css"
 const LOGIN_URL = "api/auth/login";
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
@@ -33,9 +34,8 @@ const Login = () => {
       setIsAuth(true);
       setEmail("");
       setPassword("");
-      navigate("/");
+      navigate("/chat-properties");
     } catch(err) {
-      
       console.log(err);
     }
   }
@@ -72,4 +72,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;

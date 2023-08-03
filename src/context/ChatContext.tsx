@@ -7,7 +7,7 @@ export interface ChatMessage {
   
 export interface ChatSession {
     description: string;
-    chatId: number;
+    sessionId: number;
 }
   
 interface ChatContextProps {
@@ -15,8 +15,6 @@ interface ChatContextProps {
     setCurrentMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>;
     chatSessions: ChatSession[];
     setChatSessions: React.Dispatch<React.SetStateAction<ChatSession[]>>;
-    currentMessage: string;
-    setCurrentMessage: React.Dispatch<React.SetStateAction<string>>;
     currentChatSession: ChatSession | null;
     setCurrentChatSession: React.Dispatch<React.SetStateAction<ChatSession | null>>;
 }
@@ -29,17 +27,15 @@ interface ChatContextProviderProps {
   
 export const ChatContextProvider: React.FC<ChatContextProviderProps> = ({ children }) => {
     const [currentMessages, setCurrentMessages] = useState<ChatMessage[]>([]);
-    const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
-    const [currentMessage, setCurrentMessage] = useState("");
-    const [currentChatSession, setCurrentChatSession] = useState<ChatSession | null>(null);
+    const defaultChatSession = { sessionId: 0, description: 'New Chat' };
+    const [currentChatSession, setCurrentChatSession] = useState<ChatSession | null>(defaultChatSession);
+    const [chatSessions, setChatSessions] = useState<ChatSession[]>([defaultChatSession]);
   
     const value: ChatContextProps = {
       currentMessages,
       setCurrentMessages,
       chatSessions,
       setChatSessions,
-      currentMessage,
-      setCurrentMessage,
       currentChatSession,
       setCurrentChatSession,
     };

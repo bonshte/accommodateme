@@ -3,8 +3,6 @@ import RootLayout from './layouts/RootLayout';
 import About from './pages/About';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-
-import Profile from './pages/Profile';
 import Missing from './pages/Missing';
 import { UserContextProvider } from './context/UserContext';
 import PropertiesChat from './pages/PropertiesChat';
@@ -17,7 +15,6 @@ const router = createBrowserRouter(
       <Route path="chat-properties" element={<PropertiesChat/>} />
       <Route path="sign-up" element={<SignUp />} />
       <Route path="login" element={<Login />} />
-      <Route path="profile" element={<Profile />}/>
       <Route path="*" element={<Missing />}/>
     </Route>
   )

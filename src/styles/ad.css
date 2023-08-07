@@ -1,0 +1,40 @@
+.ad-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ad-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.ad-details {
+    color: #666;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.ad-features {
+    padding-left: 20px;
+}
+
+.ad-link {
+    color: #2196f3;
+    text-decoration: none;
+}
+
+.ad-imageContainer {
+    margin-top: 20px;
+}
+
+.ad-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}

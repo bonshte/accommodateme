@@ -6,6 +6,7 @@ import ChatContent from '../components/ChatContent';
 import Properties from '../components/Properties';
 import '../styles/propertiesChat.css'
 import { ChatContextProvider } from '../context/ChatContext';
+import { RecommendedAdsProvider } from '../context/RecommendedAdsContext';
 
 
 const PropertiesChat = () => {
@@ -26,9 +27,11 @@ const PropertiesChat = () => {
   return (
     <div className="main-chat-body">
       <ChatContextProvider>
-        <ChatList />
-        <ChatContent />
-        <Properties />
+        <RecommendedAdsProvider>
+          <ChatList />
+          <ChatContent />
+          <Properties />
+        </RecommendedAdsProvider>
       </ChatContextProvider>
     </div>
   )

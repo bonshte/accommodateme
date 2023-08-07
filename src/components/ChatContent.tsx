@@ -7,6 +7,8 @@ import { ChatContext, ChatMessage, ChatSession } from '../context/ChatContext';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
+import { Ad } from './Ad';
+import { RecommendedAdsContext } from '../context/RecommendedAdsContext';
 
 const ChatContent = () => {
 
@@ -33,7 +35,35 @@ const ChatContent = () => {
     setChatSessions,
   } = chatContext!;
 
+  const recommendedAdsContext = useContext(RecommendedAdsContext);
+  const {
+    setRecommendedAds
+  } = recommendedAdsContext!;
+
   const chatEndRef = useRef<null | HTMLDivElement>(null);
+
+  const getRecommendations = async (sessionId: number) => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    try {
+      const response = await axios.get(
+        `api/ad-recommendation/${userId}/${sessionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("getting recommendations");
+      const ads: Ad[] = response.data.recommendedAds;
+      console.log(ads);
+      setRecommendedAds(ads);
+      
+    } catch (error) {
+      console.error('An error occurred while getting the recommendations:', error);
+      return null;
+    }
+  }
 
   useEffect(() => {
     if (chatEndRef.current !== null) {
@@ -48,11 +78,11 @@ const ChatContent = () => {
       return;
     }
 
-    console.log("begin handleSend", currentChatSession?.sessionId);
     const newMessage: ChatMessage = {
       fromUser: true,
       message: msg,
-      sessionId: currentChatSession!.sessionId
+      sessionId: currentChatSession!.sessionId,
+      foundAds: false
     };
     setMsg("");
     const oldMessageHistory = currentMessages;
@@ -61,7 +91,7 @@ const ChatContent = () => {
     setIsLoading(true);
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
-
+    
     try {
       const response = await axios.post(
         `api/properties-chat/${userId}/${currentChatSession?.sessionId}`,
@@ -77,16 +107,16 @@ const ChatContent = () => {
       const responseMessage: ChatMessage = {
         fromUser: false,
         message: response.data.message,
-        sessionId: response.data.chatSessionId
+        sessionId: response.data.chatSessionId,
+        foundAds: response.data.adsFound
       };
       
       if (currentChatSession?.sessionId === 0) {
-        //here is the problem :()
-        console.log(response);
         const updatedMessage : ChatMessage = {
           fromUser: true,
           message: newMessage.message,
-          sessionId: response.data.chatSessionId
+          sessionId: response.data.chatSessionId,
+          foundAds: false
         }
         const updatedMessageHistory = [...oldMessageHistory, newMessage];
         setCurrentMessages(updatedMessageHistory);
@@ -97,12 +127,14 @@ const ChatContent = () => {
         console.log("started chat session",startedChatSession)
         setCurrentChatSession(startedChatSession);
         setChatSessions(prevChatSessions => [startedChatSession, ...prevChatSessions]);
-      
+        
       }
       setCurrentMessages((prevMessages) => [...prevMessages, responseMessage]);
-      
-
-      console.log("end handleSend", currentChatSession?.sessionId);
+      console.log("hello");
+      if (response.data.adsFound === true) {
+        console.log("yes boy");
+        getRecommendations(response.data.chatSessionId);
+      }
     } catch (err) {
       console.error(err);
     } finally {

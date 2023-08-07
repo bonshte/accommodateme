@@ -4,6 +4,7 @@ export interface ChatMessage {
     fromUser: boolean;
     message: string;
     sessionId: number;
+    foundAds: boolean;
 }
   
 export interface ChatSession {
@@ -31,7 +32,7 @@ export const ChatContextProvider: React.FC<ChatContextProviderProps> = ({ childr
     const defaultChatSession = { sessionId: 0, description: 'New Chat' };
     const [currentChatSession, setCurrentChatSession] = useState<ChatSession | null>(defaultChatSession);
     const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
-  
+    
     const value: ChatContextProps = {
       currentMessages,
       setCurrentMessages,

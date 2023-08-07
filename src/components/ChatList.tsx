@@ -5,7 +5,15 @@ import axios from '../api/axios';
 import '../images/logo.jpg'
 import { useState, useEffect } from 'react';
 import ChatListItem from './ChatListItem';
-import { ChatContext } from '../context/ChatContext';
+import { ChatContext, ChatMessage } from '../context/ChatContext';
+
+const welcomeMessage : ChatMessage = {
+  fromUser: false,
+  message: "Hello! What apartment are you looking for?",
+  sessionId: 0,
+  foundAds: false
+}
+
 const ChatList = () => {
 
     const chatContext = useContext(ChatContext);
@@ -17,9 +25,7 @@ const ChatList = () => {
       currentChatSession
     } = chatContext!;
 
-    const createNewChatSession = () => {
-      console.log("begin createNewChatSession", currentChatSession?.sessionId);
-      
+    const createNewChatSession = () => {      
       if (currentChatSession?.sessionId === 0) {
         return;
       }
@@ -29,8 +35,14 @@ const ChatList = () => {
       };
       setCurrentChatSession(newChatSession);
       console.log("end createNewChatSession", currentChatSession?.sessionId);
-      setCurrentMessages([]);
+      setCurrentMessages([welcomeMessage]);
     };
+
+    useEffect(() => {
+      if (currentChatSession?.sessionId === 0) {
+        setCurrentMessages([welcomeMessage]);
+      }
+    },[]) 
    
     useEffect(() => {
       console.log("begin fetch chat sessions", currentChatSession?.sessionId);
